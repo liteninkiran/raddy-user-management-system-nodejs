@@ -20,7 +20,11 @@ app.set('view engine', 'ejs');
 
 // Routes
 app.get('/', (req, res) => {
-    res.render('index');
+    const locals = {
+        title: 'NodeJS',
+        description: 'Free NodeJS user management system',
+    };
+    res.render('index', { locals });
 });
 
 
