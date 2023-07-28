@@ -12,5 +12,6 @@ router.get('/view/:id', customerController.viewCustomer);
 router.get('/edit/:id', customerController.editCustomer);
 router.put('/edit/:id', customerController.putCustomer);
 router.delete('/edit/:id', customerController.deleteCustomer);
+router.post('/search', customerController.searchCustomers);
 
 module.exports = router;

@@ -16,6 +16,7 @@
             <tr>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
+                <th scope="col">Tel</th>
                 <th scope="col">Email</th>
                 <th scope="col" class="text-end">Action</th>
             </tr>
@@ -29,19 +30,16 @@
                 <tr class="align-middle">
 
                     <!-- First Name -->
-                    <td>
-                        <%= element.firstName %>
-                    </td>
+                    <td><%= element.firstName %></td>
 
                     <!-- Last Name -->
-                    <td>
-                        <%= element.lastName %>
-                    </td>
+                    <td><%= element.lastName %></td>
+
+                    <!-- Telephone -->
+                    <td><%= element.tel %></td>
 
                     <!-- Email -->
-                    <td>
-                        <%= element.email %>
-                    </td>
+                    <td><%= element.email %></td>
 
                     <!-- Actions -->
                     <td class="text-end">
