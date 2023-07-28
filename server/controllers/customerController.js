@@ -11,14 +11,21 @@ exports.homepage = async (req, res) => {
         description: 'Free NodeJs User Management System',
     }
 
-    let perPage = 12;
+    let perPage = 5;
     let page = req.query.page || 1;
 
     try {
-        const customers = await Customer.find({}).limit(perPage);
+        const customers = await Customer.aggregate([{ $sort: { lastName: 1, firstName: 1 } }])
+            .skip(perPage * page - perPage)
+            .limit(perPage)
+            .exec();
+        const count = await Customer.count();
+
         res.render('index', {
             locals,
             customers,
+            current: page,
+            pages: Math.ceil(count / perPage),
         });
 
     } catch (error) {
