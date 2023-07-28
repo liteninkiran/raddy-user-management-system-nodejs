@@ -172,3 +172,20 @@ exports.searchCustomers = async (req, res) => {
         console.log(error);
     }
 }
+
+/**
+ * GET /
+ * About
+ */
+exports.about = async (req, res) => {
+    const locals = {
+        title: 'About',
+        description: 'Free NodeJs User Management System',
+    };
+
+    try {
+        res.render('about', locals);
+    } catch (error) {
+        console.log(error);
+    }
+}
