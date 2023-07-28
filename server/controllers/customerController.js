@@ -72,7 +72,7 @@ exports.postCustomer = async (req, res) => {
  * GET /
  * Customer Data 
 */
-exports.view = async (req, res) => {
+exports.viewCustomer = async (req, res) => {
 
     try {
         const customer = await Customer.findOne({ _id: req.params.id });
@@ -92,4 +92,49 @@ exports.view = async (req, res) => {
     }
 
 }
+
+/**
+ * GET /
+ * New Customer Form
+ */
+exports.editCustomer = async (req, res) => {
+    try {
+        const customer = await Customer.findOne({ _id: req.params.id });
+
+        const locals = {
+            title: "Edit Customer Data",
+            description: "Free NodeJs User Management System",
+        };
+
+        res.render('customer/edit', {
+            locals,
+            customer,
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+/**
+ * PUT /
+ * Create New Customer
+ */
+exports.putCustomer = async (req, res) => {
+    try {
+        await Customer.findByIdAndUpdate(req.params.id, {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            tel: req.body.tel,
+            email: req.body.email,
+            details: req.body.details,
+            updatedAt: Date.now(),
+        });
+        await res.redirect(`/edit/${req.params.id}`);
+
+        console.log('redirected');
+    } catch (error) {
+        console.log(error);
+    }
+};
 
