@@ -19,14 +19,12 @@ app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 
 // Routes
-app.get('/', (req, res) => {
-    const locals = {
-        title: 'NodeJS',
-        description: 'Free NodeJS user management system',
-    };
-    res.render('index', { locals });
-});
+app.use('/', require('./server/routes/customer'));
 
+// Handle 404
+app.get('*', (req, res) => {
+    res.status(404).render('404');
+});
 
 app.listen(port, ()=> {
     console.log(`App listening on port ${port}`);
