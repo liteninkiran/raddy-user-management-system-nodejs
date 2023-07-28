@@ -16,7 +16,6 @@ app.use(express.json());
 // Static Files
 app.use(express.static('public'));
 
-
 // Templating Engine
 app.use(expressLayout);
 app.set('layout', './layouts/main');
@@ -30,6 +29,6 @@ app.get('*', (req, res) => {
     res.status(404).render('404');
 });
 
-app.listen(port, ()=> {
+app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });

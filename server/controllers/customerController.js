@@ -10,7 +10,20 @@ exports.homepage = async (req, res) => {
         title: 'NodeJs',
         description: 'Free NodeJs User Management System',
     }
-    res.render('index', { locals });
+
+    let perPage = 12;
+    let page = req.query.page || 1;
+
+    try {
+        const customers = await Customer.find({}).limit(perPage);
+        res.render('index', {
+            locals,
+            customers,
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 /**
