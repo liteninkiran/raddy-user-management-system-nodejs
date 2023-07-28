@@ -27,7 +27,6 @@ exports.homepage = async (req, res) => {
             current: page,
             pages: Math.ceil(count / perPage),
         });
-
     } catch (error) {
         console.log(error);
     }
@@ -61,7 +60,6 @@ exports.postCustomer = async (req, res) => {
 
     try {
         await Customer.create(newCustomer);
-
         res.redirect('/');
     } catch (error) {
         console.log(error);
@@ -73,44 +71,39 @@ exports.postCustomer = async (req, res) => {
  * Customer Data 
 */
 exports.viewCustomer = async (req, res) => {
-
     try {
         const customer = await Customer.findOne({ _id: req.params.id });
 
         const locals = {
-            title: "View Customer Data",
-            description: "Free NodeJs User Management System",
+            title: 'View Customer Data',
+            description: 'Free NodeJs User Management System',
         };
 
         res.render('customer/view', {
             locals,
             customer,
         });
-
     } catch (error) {
         console.log(error);
     }
-
 }
 
 /**
  * GET /
- * New Customer Form
+ * Update Customer Form
  */
 exports.editCustomer = async (req, res) => {
     try {
         const customer = await Customer.findOne({ _id: req.params.id });
-
         const locals = {
-            title: "Edit Customer Data",
-            description: "Free NodeJs User Management System",
+            title: 'Edit Customer Data',
+            description: 'Free NodeJs User Management System',
         };
 
         res.render('customer/edit', {
             locals,
             customer,
         });
-
     } catch (error) {
         console.log(error);
     }
@@ -118,7 +111,7 @@ exports.editCustomer = async (req, res) => {
 
 /**
  * PUT /
- * Create New Customer
+ * Update Customer
  */
 exports.putCustomer = async (req, res) => {
     try {
@@ -131,10 +124,20 @@ exports.putCustomer = async (req, res) => {
             updatedAt: Date.now(),
         });
         await res.redirect(`/edit/${req.params.id}`);
-
-        console.log('redirected');
     } catch (error) {
         console.log(error);
     }
 };
 
+/**
+ * DELETE /
+ * Delete Customer Data 
+ */
+exports.deleteCustomer = async (req, res) => {
+    try {
+        await Customer.deleteOne({ _id: req.params.id });
+        res.redirect('/');
+    } catch (error) {
+        console.log(error);
+    }
+}
